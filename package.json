@@ -1,0 +1,36 @@
+{
+  "name": "vite-generate-version-plugin",
+  "version": "1.0.1",
+  "description": "generate version",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build",
+    "build:deps": "father prebundle",
+    "prepublishOnly": "father doctor && npm run build",
+    "publishNpm": "npm run build && npm publish"
+  },
+  "keywords": [],
+  "authors": [
+    "liulunsheng"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "compiled"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "father": "^4.5.3"
+  },
+  "dependencies": {
+    "moment": "^2.30.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0"
+  }
+}

@@ -1,7 +1,4 @@
-import { execSync } from 'child_process';
-import fs from 'fs';
 import moment from 'moment';
-import path from 'path';
 
 export type GenerateVersionPluginOptions = {
   fileName?: string;
@@ -28,7 +25,7 @@ export default function generateVersionPlugin(options?: GenerateVersionPluginOpt
     },
     closeBundle: {
       sequential: true, // 串行执行
-      handler() {
+      async handler() {
         const outDir = _outDir || 'dist';
 
         // 版本生成逻辑
@@ -36,7 +33,8 @@ export default function generateVersionPlugin(options?: GenerateVersionPluginOpt
         if (typeof versionStrategy === 'function') {
           version = versionStrategy();
         } else if (versionStrategy === 'git') {
-          version = execSync('git rev-parse --short HEAD').toString().trim();
+          const child_process = await import('child_process');
+          version = child_process.execSync('git rev-parse --short HEAD').toString().trim();
         } else {
           version = moment().format('YYYYMMDDHHmmss'); // 默认时间戳
         }
@@ -46,6 +44,8 @@ export default function generateVersionPlugin(options?: GenerateVersionPluginOpt
           version,
           buildTime: moment().format('YYYY-MM-DD HH:mm:ss'),
         };
+        const fs = await import('fs');
+        const path = await import('path');
         if (!fs.existsSync(outDir)) {
           fs.mkdirSync(outDir, { recursive: true });
         }

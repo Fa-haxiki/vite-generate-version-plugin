@@ -44,7 +44,7 @@ function App() {
         centered: true,
         content: (
           <p>
-            Current Version：{currentVersion} <br />
+            Current Version：{currentVersion} <br/>
             Latest Version：{latestVersion}
           </p>
         ),
@@ -59,29 +59,29 @@ function App() {
 
   return (
     <Router>
-      <RouterContent />
+      <RouterContent/>
     </Router>
   );
 }
 ```
+
 ## Options
 
 ### generateVersionPlugin(options?: GenerateVersionPluginOptions)
 
-| Option | Type                  | Default          | Description                                                                                              |
-| --- |-----------------------|------------------|----------------------------------------------------------------------------------------------------------|
-| `filename` | `string`              | `'version.json'` | The filename of the version file.                                                                        |
+| Option            | Type                  | Default          | Description                                                                                              |
+|-------------------|-----------------------|------------------|----------------------------------------------------------------------------------------------------------|
+| `filename`        | `string`              | `'version.json'` | The filename of the version file.                                                                        |
 | `versionStrategy` | `string  \| function` | `undefined`      | The strategy to generate version. If type is string, you can use 'git', it will use the git commit hash. |
-
 
 ### useVersionCheck(options: UseVersionCheckOptions)
 
-| Option | Type | Default | Description                                           |
-| --- | --- | --- |-------------------------------------------------------|
-| `fetchVersionUrl` | `string` | `''` | The url to fetch the version file.                    |
+| Option                 | Type                                                                   | Default     | Description                                           |
+|------------------------|------------------------------------------------------------------------|-------------|-------------------------------------------------------|
+| `fetchVersionUrl`      | `string`                                                               | `''`        | The url to fetch the version file.                    |
 | `onNewVersionCallback` | `(options: { currentVersion: string, latestVersion: string }) => void` | `undefined` | The callback function when a new version is detected. |
-| `checkInterval` | `number` | `60 * 1000` | The interval to check version.                        |
-
+| `checkInterval`        | `number`                                                               | `60 * 1000` | The interval to check version.                        |
+| `ignoreVersionCheck`   | `() => boolean`                                                        | `false`     | Ignore version check.                                 |
 
 ## LICENSE
 

@@ -2,21 +2,27 @@
 import { useLayoutEffect, useRef } from 'react';
 
 export type UseVersionCheckOptions = {
+  // 版本更新回调函数
   onNewVersionCallback?: (options: {
     currentVersion: string;
     latestVersion: string;
   }) => void;
+  // 版本信息获取地址
   fetchVersionUrl: string;
+  // 检测间隔时间 (默认 60s)
   checkInterval?: number;
+  // 忽略版本检查 (默认 false)
+  ignoreVersionCheck?: () => boolean;
 };
 
 /**
  * 版本检测 hook
  */
 export default function useVersionCheck({
-  onNewVersionCallback, // 版本更新回调函数
-  fetchVersionUrl, // 版本信息获取地址
-  checkInterval = 60 * 1000, // 检测间隔时间
+  onNewVersionCallback,
+  fetchVersionUrl,
+  checkInterval = 60 * 1000,
+  ignoreVersionCheck = () => false,
 }: UseVersionCheckOptions) {
   const currentVersion = useRef<string | null>(null);
   const modalShow = useRef<boolean>(false);
@@ -56,6 +62,7 @@ export default function useVersionCheck({
 
   useLayoutEffect(() => {
     if (process.env.NODE_ENV === 'development') return; // 开发环境不检测版本
+    if (ignoreVersionCheck()) return; // 忽略版本检查
     checkVersion();
     versionCheckInterval.current = window.setInterval(() => {
       checkVersion();

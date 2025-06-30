@@ -1,6 +1,6 @@
 {
   "name": "vite-generate-version-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "generate version",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -11,6 +11,10 @@
     "build:deps": "father prebundle",
     "prepublishOnly": "father doctor && npm run build",
     "publishNpm": "npm run build && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fa-haxiki/vite-generate-version-plugin"
   },
   "keywords": [],
   "authors": [
